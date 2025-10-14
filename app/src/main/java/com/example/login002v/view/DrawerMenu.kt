@@ -70,14 +70,14 @@ fun DrawerMenu(
 
             item{
                 NavigationDrawerItem(
-                    label={Text("Hamburguesa BBQ")},
+                    label={Text("Marcaciones")},
                     selected = false,
                     onClick = {
-
-                   /* Accion Futura */
-
+                       // val nombre = Uri.encode("Hamburguesa Clasica")
+                       // val precio="5000"
+                        navController.navigate("reinspeccion")
                     },//fin onclick
-                    icon = {Icon(Icons.Default.LunchDining , contentDescription = "BBQ"  )}
+                    icon = {Icon(Icons.Default.Fastfood , contentDescription = "Clasica"  )}
                 )
             }// fin item 2
 

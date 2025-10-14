@@ -5,22 +5,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import com.example.login002v.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -40,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.login002v.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,10 +55,10 @@ fun LoginScreen(
     var showPass by remember { mutableStateOf(false) }
 
     // darkColorScheme  es una funcion de material3 que define un color oscuro
-    val ColorScheme = darkColorScheme(
-        primary= Color(0xFF98222E),
-        onPrimary = Color.White,
-        onSurface = Color(0xFF333333), //Gris
+    val ColorScheme = lightColorScheme(
+        primary= Color(0xFF00049E),   // Boton
+        onPrimary = Color(0xFF00049E), //Azul,
+        onSurface = Color(0xFF1E1D1D), //Gris
     ) // fin dark
 
 
@@ -71,14 +70,29 @@ fun LoginScreen(
 
         Scaffold (
             // Crea Estuctra basica de la pantalla Se define topBar, BottomBar
-            topBar = {
-                TopAppBar(title = {Text("Mi Primer App",
-                    color =MaterialTheme.colorScheme.onPrimary,
-                )})
 
+
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            "Marcaciones Reinspección",
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                )
+            }
+
+          /*
+            topBar = {
+                CenterAlignedTopAppBar(
+                TopAppBar(title = {Text("Marcaciones Reinspección",
+                    color =MaterialTheme.colorScheme.onPrimary,
+                )}))
+*/
                 // Crea un AppBar con un titulo
 
-            }// fin topBar
+ //           }// fin topBar
         ) // fin Scaff
         {// Inicio Inner
                 innerPadding ->
@@ -86,11 +100,11 @@ fun LoginScreen(
 
             Column (  //   Colaca los elementos de la Ui
                 modifier = Modifier
-                    .padding( innerPadding)
+                    .padding(innerPadding)
                     // Evita que quede oculto
                     .fillMaxSize() // Hace que la columnna tome el todo el tamaño
                     .padding(16.dp)
-                    .background(Color(0xFFF0F0F0)), // gris Claro
+                    .background(Color(0xFFFFFFFF)), // gris Claro
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally  // Centra horizontalmente
                 //Define  que elementos dentro la columna estaran separados por 20.dp
@@ -98,7 +112,7 @@ fun LoginScreen(
             {// inicio Contenido
                 Text(text="Bienvenido !",
                     style= MaterialTheme.typography.headlineMedium,
-                    color=MaterialTheme.colorScheme.primary
+                    color=MaterialTheme.colorScheme.onPrimary
 
 
                 ) // Muestra un texto simple en la pantalla
@@ -107,7 +121,7 @@ fun LoginScreen(
 
 
                 Image(  // insertar una imagen en la interfaz
-                    painter= painterResource(id = R.drawable.logoduoc),
+                    painter= painterResource(id = R.drawable.logogris),
                     contentDescription = "Logo App",
                     modifier = Modifier
                         .fillMaxWidth()
@@ -125,32 +139,7 @@ fun LoginScreen(
 
 
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                )// Fin Row
-                {// Aplica row
-                    Text("texto uno",
-                        style =MaterialTheme.typography.bodyLarge.copy(
-                            color=MaterialTheme.colorScheme.onSurface.copy(alpha=0.8f),
-                            fontWeight = FontWeight.Bold),
-                        modifier = Modifier
-                            .padding(end=8.dp)
-                    )// fin texto 1
 
-
-                    Text("texto dos",
-                        style =MaterialTheme.typography.bodyLarge.copy(
-                            color=MaterialTheme.colorScheme.onSurface.copy(alpha=0.8f),
-                            fontWeight = FontWeight.Bold),
-                        modifier = Modifier
-                            .padding(end=8.dp)
-                    )// fin texto 1
-
-
-                } // fin Aplica row
 
 
                 OutlinedTextField(
@@ -159,6 +148,7 @@ fun LoginScreen(
                     label={Text("Usuario")},
                     singleLine = true,
                     modifier=Modifier.fillMaxWidth(0.95f)
+
                 )
 
                 OutlinedTextField(
@@ -188,7 +178,7 @@ fun LoginScreen(
                     Spacer(Modifier.height(8.dp))
                     Text(
                         text=state.error ?:"",
-                        color= MaterialTheme.colorScheme.primary,
+                        color= MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.Bold
                     )
 
@@ -199,27 +189,24 @@ fun LoginScreen(
 
                 Spacer(modifier = Modifier.height(66.dp))
 
-                Button(onClick = {/* accion futura*/
-                    vm.submit { user ->
-                        //navController.navigate("muestraDatos/user")
-                        navController.navigate("DrawerMenu/user")
-
-                        // Navegar a una pantalla pasando el parametro
-                        { // inicio navegar
-                        popUpTo("login"){inclusive= true}
-                            // No puede volver al login con Back
-
-                        // evite crear una nueva instancia
-                            launchSingleTop =true
-                        } // termino navegar
-
-                    }// fin submit
-                },
-                    enabled=!state.isLoading,
-                    modifier = Modifier.fillMaxWidth(0.6f)
-
-                )//fin button
-
+                Button(
+                    onClick = {/* accion futura*/
+                        vm.submit { user ->
+                            navController.navigate("DrawerMenu/user") {
+                                popUpTo("login") { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        }
+                    },
+                    enabled = !state.isLoading,
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF00049E),     // R=0, G=4, B=158
+                        contentColor = Color.White,             // texto en blanco
+                        disabledContainerColor = Color(0xFF00049E).copy(alpha = 0.45f),
+                        disabledContentColor = Color.White.copy(alpha = 0.7f)
+                    )
+                ) //fin Button
 
                 {
                    // Text("Presioname")
