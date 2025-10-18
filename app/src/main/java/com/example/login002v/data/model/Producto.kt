@@ -10,6 +10,7 @@ data class Producto(
     val nombre:String,
     val precio:String,
     val cantidad:String,
+    val direccion:String,
     val conPapas:Boolean,
     val agrandarBebida: Boolean
 )
