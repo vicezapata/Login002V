@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class ProductoRepository (private val productoDao: ProductoDao){
 
 suspend fun insertarProducto(producto: Producto){
-        productoDao.insertarProducto(producto)
+        productoDao.insertProducto(producto)
 }
 
     fun obtenerProductos(): Flow<List<Producto>>{
